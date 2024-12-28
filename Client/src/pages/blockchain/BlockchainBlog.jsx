@@ -1,0 +1,83 @@
+import React from "react";
+import { motion } from "framer-motion";
+import { blockchainData } from "../../data/blockchain";
+
+const BlockchainBlog = () => {
+  return (
+    <div className="text-white py-16 px-8">
+      <div className="max-w-5xl mx-auto">
+        {/* Main Title */}
+        <motion.h1
+          className="text-5xl sm:text-6xl font-bold text-white mb-12"
+          initial={{ opacity: 0, y: -50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+        >
+          Blockchain vo FinTech: Všetko, čo potrebujete vedieť
+        </motion.h1>
+
+        {/* Blog Sections */}
+        {blockchainData.map((section, index) => (
+          <motion.div
+            key={index}
+            className="mb-12 p-8 rounded-lg  shadow-md"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            viewport={{ once: true, amount: 0.2 }}
+          >
+            {/* Section Title with Number */}
+            <div className="mb-6">
+              <span className="text-2xl font-semibold text-purple-400 mr-2">
+                {index + 1}.
+              </span>
+              <h2 className="inline-block text-3xl sm:text-4xl font-bold text-white">
+                {section.title}
+              </h2>
+            </div>
+
+            {/* Section Content */}
+            <div className="text-gray-300 text-lg sm:text-xl leading-relaxed mb-6">
+              <p className="mb-4">{section.description}</p>
+
+              <div className="bg-gradient-to-l from-purple-500 to-transparent border-l-4 border-purple-400 pl-4 italic my-6 py-2 text-gray-200">
+                <strong>Praktický príklad:</strong> {section.realWorldExample}
+              </div>
+
+              <p className="mt-4">{section.detailedInfo}</p>
+
+              {/* Key Points */}
+              <ul className="mt-6 list-disc list-inside text-gray-300">
+                {section.keyPoints.map((point, idx) => (
+                  <li key={idx} className="mb-2">
+                    {point}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </motion.div>
+        ))}
+
+        {/* Final Note Section */}
+        <motion.div
+          className="p-6 text-center text-gray-400 italic border-t border-gray-600 mt-16"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ delay: 0.2, duration: 0.6 }}
+          viewport={{ once: true }}
+        >
+          <p>
+            Blockchain technológia prináša revolúciu v oblasti finančných
+            služieb. Je nevyhnutnou súčasťou FinTech inovácií, prinášajúc
+            transparentnosť, bezpečnosť a efektivitu.
+          </p>
+          <p className="mt-4">
+            Preskúmajte, ako blockchain môže zlepšiť vaše podnikanie už dnes!
+          </p>
+        </motion.div>
+      </div>
+    </div>
+  );
+};
+
+export default BlockchainBlog;
