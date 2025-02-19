@@ -17,19 +17,22 @@ export const AuthProvider = ({ children }) => {
   // Funkcia na načítanie používateľa zo servera
   const fetchUser = async (token) => {
     try {
-      const response = await axios.get('/api/auth/me', {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+      console.log("Calling /api/auth/me with token =", token);
+  
+      const response = await axios.get("http://localhost:5000/api/auth/me", {
+        headers: { Authorization: `Bearer ${token}` },
       });
-      console.log('Fetched user:', response.data.user);
+  
+      console.log("Response data:", response.data); // Skontroluj celé response.data
+      console.log("Fetched user:", response.data.user);
+  
       setAuth((prevAuth) => ({
         ...prevAuth,
         user: response.data.user,
       }));
     } catch (error) {
-      console.error('Error fetching user data:', error);
-      logout(); // Ak je token neplatný, odhlásiť používateľa
+      console.error("Error fetching user data:", error);
+      logout();
     }
   };
 

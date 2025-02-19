@@ -1,19 +1,19 @@
-// server/models/Analysis.js
-import mongoose from 'mongoose';
+// models/Analysis.js
+import mongoose from "mongoose";
 
-const AnalysisSchema = new mongoose.Schema({
+const analysisSchema = new mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
+    ref: "User",
+    required: false, // anonym môže byť bez user
+  },
+  suggestions: {
+    type: Object,
     required: true,
   },
-  companyData: {
-    type: String,
-    required: true,
-  },
-  analysisResult: {
-    type: Object, // Ukladanie AI generovaného JSON
-    required: true,
+  formData: {
+    type: Object,
+    required: false,
   },
   createdAt: {
     type: Date,
@@ -21,4 +21,6 @@ const AnalysisSchema = new mongoose.Schema({
   },
 });
 
-export default mongoose.model('Analysis', AnalysisSchema);
+const Analysis = mongoose.model("Analysis", analysisSchema);
+
+export default Analysis;

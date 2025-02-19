@@ -11,6 +11,7 @@ function authenticateToken(req, res, next) {
     if (err) return res.status(403).json({ error: 'Token je neplatný.' });
     console.log('Decoded Token:', user); // Debugging: Skontrolujte obsah tokenu
     req.user = user; // Priraďujeme celý objekt user
+    console.log("Token OK, user:", user);
     next();
   });
 }

@@ -26,6 +26,7 @@ function App() {
               <Route path="/blockchain" element={<LandingPage />} />
               <Route path="/register" element={<SignUp />} />
               <Route path="/login" element={<Login />} />
+              <Route path="/historia" element={<AnalysisHistory/>}/>
               <Route
                 path="/moj-profil"
                 element={

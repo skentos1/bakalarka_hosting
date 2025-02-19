@@ -34,8 +34,7 @@ const FintechForm = ({ setCompanyInfo, setSuggestions, setError }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    // Construct companyInfo from form inputs
-    const companyInfo = {
+    const formData = {
       companyName,
       industry,
       companyType,
@@ -52,8 +51,28 @@ const FintechForm = ({ setCompanyInfo, setSuggestions, setError }) => {
       regulatoryConsiderations,
     };
 
+    setCompanyInfo(formData);
+
+    // // Construct companyInfo from form inputs
+    // const companyInfo = {
+    //   companyName,
+    //   industry,
+    //   companyType,
+    //   companySize,
+    //   location,
+    //   currentTech,
+    //   financialGoals,
+    //   customerType,
+    //   businessChallenges,
+    //   targetMarket,
+    //   competitiveLandscape,
+    //   digitalPresence,
+    //   budgetConstraints,
+    //   regulatoryConsiderations,
+    // };
+
     // Pass companyInfo to parent component
-    setCompanyInfo(companyInfo);
+    //setCompanyInfo(companyInfo);
 
     // Prepare data for the backend
     const companyData = `
@@ -95,10 +114,14 @@ const FintechForm = ({ setCompanyInfo, setSuggestions, setError }) => {
     }, 100);
 
     try {
+      const token = localStorage.getItem("token");
       const response = await fetch("http://localhost:5000/api/analyze", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ companyData }),
+        headers: { 
+          "Content-Type": "application/json",
+          ...(token ? {Authorization: `Bearer ${token}` } : {}),
+         },
+         body: JSON.stringify({ formData, companyData }),
       });
 
       clearInterval(progressInterval);

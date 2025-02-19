@@ -89,6 +89,7 @@ router.post("/login", async (req, res) => {
 });
 
 router.get('/me', authenticateToken, async (req, res) => {
+  console.log("Vo /me route, req.user =", req.user);
     try {
       const user = await User.findById(req.user.userId).select('-password'); // Vynechanie hesla
       if (!user) return res.status(404).json({ error: 'Používateľ nenájdený.' });
