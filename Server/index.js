@@ -16,8 +16,12 @@ import { fileURLToPath } from "url";
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 5000;
 
+const PORT = process.env.PORT || 5000;
+app.use((req, res, next) => {
+  console.log(`[Request] ${req.method} ${req.url} - Origin: ${req.headers.origin}`);
+  next();
+});
 
 // app.use(express.static(path.join(__dirname, 'client', 'dist')));
 // app.get('*', (req, res) => {
@@ -30,7 +34,12 @@ app.use(cors({
 
 app.use(express.json());
 
-
+app.use((req, res, next) => {
+  res.on('finish', () => {
+    console.log(`[Response] ${req.method} ${req.url} - Access-Control-Allow-Origin: ${res.getHeader('Access-Control-Allow-Origin')}`);
+  });
+  next();
+});
 
 
 mongoose.connect(process.env.MONGODB_URI,
