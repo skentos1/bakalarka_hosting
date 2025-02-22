@@ -31,7 +31,7 @@ const MojProfil = () => {
         return;
       }
       try {
-        const response = await axios.get("http://localhost:5000/api/auth/me", {
+        const response = await axios.get("https://bakalarka-hosting.onrender.com/api/auth/me", {
           headers: {
             Authorization: `Bearer ${auth.token}`,
           },
@@ -60,7 +60,7 @@ const MojProfil = () => {
       try {
         // POZOR: Uisti sa, že tvoj endpoint je "/api/analyze/history" alebo "/api/analysis/history"
         // Podľa toho, ako ho máš definovaný na backende
-        const res = await axios.get("http://localhost:5000/api/analyze/history", {
+        const res = await axios.get("https://bakalarka-hosting.onrender.com/api/analyze/history", {
           headers: {
             Authorization: `Bearer ${auth.token}`,
           },
