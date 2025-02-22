@@ -12,7 +12,7 @@ const AnalysisHistory = () => {
   // AnalysisHistory.jsx
 useEffect(() => {
   axios
-    .get("http://localhost:5000/api/analyze/history")
+    .get("https://bakalarka-hosting.onrender.com/api/analyze/history")
     .then((res) => {
       // Bezpečne skontroluj
       if (res.data && Array.isArray(res.data.analyses)) {
