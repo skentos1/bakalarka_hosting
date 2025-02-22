@@ -24,7 +24,7 @@ const PORT = process.env.PORT || 5000;
 //   res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'));
 // });
 app.use(cors({
-  origin: 'http://localhost:5173', // Vaša frontendová URL
+  origin: '*', // Vaša frontendová URL
   credentials: true, // Umožňuje odosielanie cookies
 }));
 app.use(express.json());
