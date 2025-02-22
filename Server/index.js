@@ -24,9 +24,10 @@ const PORT = process.env.PORT || 5000;
 //   res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'));
 // });
 app.use(cors({
-  origin: '*', // Vaša frontendová URL
-  credentials: true, // Umožňuje odosielanie cookies
+  origin: ['https://bakalarka-hosting-1.onrender.com'],
+  credentials: true,
 }));
+
 app.use(express.json());
 
 
