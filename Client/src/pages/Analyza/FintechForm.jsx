@@ -115,7 +115,7 @@ const FintechForm = ({ setCompanyInfo, setSuggestions, setError }) => {
 
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch("http://localhost:5000/api/analyze", {
+      const response = await fetch("https://bakalarka-hosting.onrender.com/api/analyze", {
         method: "POST",
         headers: { 
           "Content-Type": "application/json",
