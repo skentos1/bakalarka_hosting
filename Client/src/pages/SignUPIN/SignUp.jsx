@@ -80,7 +80,7 @@ const SignUp = () => {
           lastName,
           email,
           password,
-        }
+        }, { withCredentials: true }
       );
 
       setSuccess(response.data.message);
