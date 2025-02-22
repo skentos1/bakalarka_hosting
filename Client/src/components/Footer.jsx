@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
+import { FaFacebookF, FaInstagram, FaLinkedinIn } from "react-icons/fa";
 
 const Footer = () => {
   // Použitie useAnimation z framer-motion
@@ -59,26 +60,26 @@ const Footer = () => {
             </li>
             <li>
               <a
-                href="#"
+                href="/analyza"
                 className="text-gray-400 hover:text-purple-400 transition"
               >
-                Technológie
+                Analýza
               </a>
             </li>
             <li>
               <a
-                href="#"
+                href="/blockchain"
                 className="text-gray-400 hover:text-purple-400 transition"
               >
-                O nás
+                BlockChain technológia
               </a>
             </li>
             <li>
               <a
-                href="#"
+                href="/umela-inteligencia"
                 className="text-gray-400 hover:text-purple-400 transition"
               >
-                Kontakt
+                Umelá Inteligencia
               </a>
             </li>
           </ul>
@@ -118,30 +119,39 @@ const Footer = () => {
 
       {/* Footer Bottom */}
       <div className="border-t border-gray-700 mt-10 py-4">
-        <div className="max-w-6xl mx-auto flex justify-between items-center">
+        <div className="max-w-6xl mx-auto flex flex-col justify-between items-center">
           <p className="text-gray-400 text-sm">
             © 2024 FinTech Company. Všetky práva vyhradené.
           </p>
-          <div className="flex space-x-4">
-            <a
-              href="#"
-              className="text-gray-400 hover:text-purple-400 transition"
-            >
-              Facebook
-            </a>
-            <a
-              href="#"
-              className="text-gray-400 hover:text-purple-400 transition"
-            >
-              LinkedIn
-            </a>
-            <a
-              href="#"
-              className="text-gray-400 hover:text-purple-400 transition"
-            >
-              Twitter
-            </a>
-          </div>
+          <div className="flex flex-wrap space-x-4 mt-4 md:mt-0">
+          <a
+            href="https://www.facebook.com/s.kentos2/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center space-x-2 text-gray-400 hover:text-purple-400 transition"
+          >
+            <FaFacebookF className="text-2xl" />
+            <span>Facebook</span>
+          </a>
+          <a
+            href="https://www.linkedin.com/in/simon-kento%C5%A1-7a668133a/?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center space-x-2 text-gray-400 hover:text-purple-400 transition"
+          >
+            <FaLinkedinIn className="text-2xl" />
+            <span>LinkedIn</span>
+          </a>
+          <a
+            href="https://www.instagram.com/s.kentos/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center space-x-2 text-gray-400 hover:text-purple-400 transition"
+          >
+            <FaInstagram className="text-2xl" />
+            <span>Instagram</span>
+          </a>
+        </div>
         </div>
       </div>
     </motion.footer>

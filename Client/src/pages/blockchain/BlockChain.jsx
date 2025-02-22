@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React from "react";
 import { motion } from "framer-motion";
 
 const BlockchainComponent = () => {
@@ -30,95 +30,98 @@ const BlockchainComponent = () => {
     },
   ];
 
-  const sectionRefs = useRef([]);
-  const [progress, setProgress] = useState(0);
-
-  const handleScroll = () => {
-    const totalHeight =
-      sectionRefs.current[sectionRefs.current.length - 1]?.offsetTop -
-      sectionRefs.current[0]?.offsetTop;
-
-    const scrollTop = window.scrollY;
-    const elementOffsetTop = sectionRefs.current[0]?.offsetTop;
-    const currentScroll = scrollTop - elementOffsetTop;
-
-    const progressPercentage = (currentScroll / totalHeight) * 100;
-
-    if (progressPercentage >= 0 && progressPercentage <= 100) {
-      setProgress(progressPercentage);
-    }
-  };
-
-  useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
-
   return (
-    <div className="text-white min-h-screen py-16 pb-24">
-      <h1 className="text-center text-4xl sm:text-5xl font-bold mb-16 leading-tight text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">
+    <section className="relative text-white py-16 pb-24">
+      <h1 className="text-center text-4xl sm:text-5xl font-bold mb-16 leading-tight bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">
         Vplyv Blockchain <br /> technológie vo FinTech
       </h1>
-      <div className="relative max-w-6xl mx-auto px-8">
-        <div className="absolute left-1/2 transform -translate-x-1/2 top-0 h-full w-1 bg-gray-600">
-          <motion.div
-            className="absolute left-0 top-0 w-full bg-gradient-to-b from-purple-400 to-pink-600 rounded-full"
-            style={{ height: `${progress}%` }}
-            transition={{ duration: 0.3, ease: "easeOut" }}
-          />
-        </div>
+      <div className="relative max-w-6xl mx-auto px-4">
+        {/* Vertikálna línia timeline (iba pre desktop) */}
+        <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-1 bg-gray-600"></div>
 
-        {benefits.map((benefit, index) => (
-          <motion.div
-            key={index}
-            className={`flex items-center w-full mb-32 ${
-              index % 2 === 0 ? "flex-row-reverse" : ""
-            }`}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.3 }} // Adjusted for better visibility
-            transition={{
-              duration: 0.6,
-              ease: "easeOut",
-              staggerChildren: 0.15,
-            }}
-            variants={{
-              visible: { opacity: 1, x: 0 },
-              hidden: { opacity: 0, x: index % 2 === 0 ? 100 : -100 },
-            }}
-            ref={(el) => (sectionRefs.current[index] = el)} // Assigning refs to sections
-          >
-            <motion.div
-              className="w-5/12 px-6 sm:px-12"
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1, duration: 0.6, ease: "easeOut" }}
-            >
-              <h3 className="text-3xl sm:text-4xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">
-                {benefit.title}
-              </h3>
-              <p className="text-gray-300 text-lg sm:text-xl leading-relaxed">
-                {benefit.description}
-              </p>
-            </motion.div>
-
-            <div className="flex flex-col items-center absolute left-1/2 transform -translate-x-1/2">
+        <div className="space-y-12">
+          {benefits.map((benefit, index) => {
+            const isEven = index % 2 === 0;
+            return (
               <motion.div
-                className="w-8 h-8 sm:w-8 sm:h-8 bg-purple-600 rounded-full border-4 border-gray-800 shadow-md transition-transform transform hover:scale-110 duration-300"
-                initial={{ scale: 0 }}
-                whileInView={{ scale: 1.1 }}
-                transition={{ duration: 0.3, ease: "easeInOut" }}
-              ></motion.div>
-              {index !== benefits.length - 1 && (
-                <div className="h-full w-1 bg-gray-600"></div>
-              )}
-            </div>
-          </motion.div>
-        ))}
+                key={index}
+                className="relative"
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.2 }}
+                viewport={{ once: true, amount: 0.3 }}
+              >
+                {/* Desktop View */}
+                <div className="hidden md:grid md:grid-cols-3 md:items-center">
+                  {isEven ? (
+                    <>
+                      {/* Ľavý prázdny stĺpec */}
+                      <div></div>
+                      {/* Centrálna značka */}
+                      <div className="flex justify-center">
+                        <motion.div
+                          whileHover={{ scale: 1.1 }}
+                          transition={{ duration: 0.3, ease: "easeInOut" }}
+                          className="w-8 h-8 bg-purple-600 rounded-full border-4 border-gray-800 shadow-md"
+                        ></motion.div>
+                      </div>
+                      {/* Obsah na pravej strane */}
+                      <div className="pl-8 text-left">
+                        <h3 className="text-3xl sm:text-4xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">
+                          {benefit.title}
+                        </h3>
+                        <p className="text-gray-300 text-lg sm:text-xl leading-relaxed">
+                          {benefit.description}
+                        </p>
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      {/* Obsah na ľavej strane */}
+                      <div className="pr-8 text-right">
+                        <h3 className="text-3xl sm:text-4xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">
+                          {benefit.title}
+                        </h3>
+                        <p className="text-gray-300 text-lg sm:text-xl leading-relaxed">
+                          {benefit.description}
+                        </p>
+                      </div>
+                      {/* Centrálna značka */}
+                      <div className="flex justify-center">
+                        <motion.div
+                          whileHover={{ scale: 1.1 }}
+                          transition={{ duration: 0.3, ease: "easeInOut" }}
+                          className="w-8 h-8 bg-purple-600 rounded-full border-4 border-gray-800 shadow-md"
+                        ></motion.div>
+                      </div>
+                      {/* Pravý prázdny stĺpec */}
+                      <div></div>
+                    </>
+                  )}
+                </div>
+
+                {/* Mobile View */}
+                <div className="md:hidden flex items-start">
+                  <motion.div
+                    whileHover={{ scale: 1.1 }}
+                    transition={{ duration: 0.3, ease: "easeInOut" }}
+                    className="w-8 h-8 bg-purple-600 rounded-full border-4 border-gray-800 shadow-md mr-4 flex-shrink-0"
+                  ></motion.div>
+                  <div>
+                    <h3 className="text-2xl font-bold mb-2 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">
+                      {benefit.title}
+                    </h3>
+                    <p className="text-gray-300 text-base leading-relaxed">
+                      {benefit.description}
+                    </p>
+                  </div>
+                </div>
+              </motion.div>
+            );
+          })}
+        </div>
       </div>
-    </div>
+    </section>
   );
 };
 

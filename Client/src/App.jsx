@@ -10,6 +10,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import MojProfil from "./pages/MojProfil/MojProfil";
 import { AuthProvider } from "./context/AuthContext";
 import AnalysisHistory from "./pages/MojProfil/AnalysisHistory";
+import ScrollToTop from "./components/ScrollToTop";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <div className="flex-grow p-6">
             {" "}
             {/* Added flex-grow to ensure content expands */}
+            <ScrollToTop />
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/analyza" element={<FintechAnalysis />} />

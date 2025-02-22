@@ -46,7 +46,7 @@ router.post("/register", async (req, res) => {
 // Login používateľa
 router.post("/login", async (req, res) => {
   const { email, password } = req.body;
-
+  console.log("Request body:", req.body);
   // Základná validácia
   if (!email || !password) {
     return res.status(400).json({ error: "Email a heslo sú povinné." });

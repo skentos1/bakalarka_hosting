@@ -6,17 +6,31 @@ import dotenv from "dotenv";
 import mongoose from "mongoose";
 import authRoutes from './routes/auth.js'
 import analyzeRoutes from './routes/analyze.js'
+import path from 'path';
+import { fileURLToPath } from "url";
+
+// __filename = fileURLToPath(import.meta.url);
+//const __dirname = path.dirname(__filename);
+
 
 dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+
+// app.use(express.static(path.join(__dirname, 'client', 'dist')));
+// app.get('*', (req, res) => {
+//   res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'));
+// });
 app.use(cors({
   origin: 'http://localhost:5173', // Vaša frontendová URL
   credentials: true, // Umožňuje odosielanie cookies
 }));
 app.use(express.json());
+
+
+
 
 mongoose.connect(process.env.MONGODB_URI,
    { useNewUrlParser: true, 

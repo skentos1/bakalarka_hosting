@@ -29,8 +29,8 @@ const CryptoMarquee = () => {
   ];
 
   useEffect(() => {
-    // Simulate a loading period
-    setTimeout(() => setLoading(false), 1000); // Change the delay as needed
+    const timer = setTimeout(() => setLoading(false), 1000);
+    return () => clearTimeout(timer);
   }, []);
 
   if (loading) {
@@ -50,42 +50,49 @@ const CryptoMarquee = () => {
   }
 
   return (
-    <div className="bg-black pt-20 pb-12">
-      <div className="max-w-7xl mx-auto text-center mb-8">
+    <div className="bg-black pt-20 pb-6 sm:pb-12 relative overflow-hidden">
+      <div className="max-w-7xl mx-auto text-center mb-4 sm:mb-8 px-4">
         <p className="text-gray-400 text-lg tracking-widest uppercase">
           Key Cryptocurrencies and Blockchain Innovations
         </p>
       </div>
 
+      {/* Gradient overlay pre fade efekt na okrajoch */}
+      <div className="absolute top-0 left-0 h-full w-full pointer-events-none">
+        <div className="absolute top-0 left-0 h-full w-32 bg-gradient-to-r from-black to-transparent" />
+        <div className="absolute top-0 right-0 h-full w-32 bg-gradient-to-l from-black to-transparent" />
+      </div>
+
       <div className="overflow-hidden relative whitespace-nowrap">
         <motion.div
-          className="flex gap-16 justify-center items-center"
-          animate={{ x: [0, -3000] }} // Continuous movement in one direction
+          className="flex gap-8 sm:gap-16 justify-center items-center"
+          animate={{ x: [0, -3000] }}
           transition={{
             repeat: Infinity,
             ease: "linear",
-            duration: 60, // Slow down the scrolling speed
+            duration: 60,
           }}
         >
           {cryptoData.concat(cryptoData).map((crypto, index) => (
-            <div
+            <motion.div
               key={index}
-              className="flex items-center justify-center gap-4 px-6"
+              whileHover={{ scale: 1.05 }}
+              className="flex items-center justify-center gap-2 sm:gap-4 px-4 sm:px-6"
             >
-              {/* Logo */}
               <img
                 src={crypto.logo}
                 alt={crypto.name}
-                className="h-12 w-auto"
+                className="h-10 sm:h-12 w-auto"
               />
-              {/* Name and info */}
               <div className="text-left">
-                <h3 className="text-white text-xl font-semibold">
+                <h3 className="text-white text-base sm:text-xl font-semibold">
                   {crypto.name}
                 </h3>
-                <p className="text-gray-400 text-sm">{crypto.info}</p>
+                <p className="text-gray-400 text-xs sm:text-sm">
+                  {crypto.info}
+                </p>
               </div>
-            </div>
+            </motion.div>
           ))}
         </motion.div>
       </div>

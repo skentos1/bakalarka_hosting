@@ -234,6 +234,8 @@ const SignUp = () => {
                 id="password"
                 className="w-full px-4 py-2 bg-gray-800 text-gray-200 border border-[#cea2fd] rounded focus:outline-none focus:ring-2 focus:ring-pink-400"
                 placeholder="Zadaj svoje heslo"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
               />
               <button
                 type="button"

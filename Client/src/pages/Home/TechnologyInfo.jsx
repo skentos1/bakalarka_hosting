@@ -9,11 +9,12 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
+import { Link } from "react-router-dom";
 
 const TechnologyInfo = ({ technology }) => {
   return (
     <motion.div
-      className="flex flex-col lg:flex-row justify-between items-center max-w-7xl mx-auto py-12"
+      className="flex flex-col lg:flex-row justify-between items-center max-w-7xl mx-auto py-12 px-4 sm:px-8"
       initial={{ opacity: 0, y: 50 }}
       animate={{ opacity: 1, y: 0 }}
       key={technology.name}
@@ -21,24 +22,26 @@ const TechnologyInfo = ({ technology }) => {
     >
       {/* Left Side: Title, Description, and Action Button */}
       <div className="lg:w-1/2 w-full text-left lg:pr-12 mb-12 lg:mb-0">
-        <h1 className="text-6xl font-bold leading-tight text-white mb-4">
+        <h1 className="text-5xl sm:text-6xl  font-bold leading-tight text-white mb-4">
           Introducing{" "}
           <span className="bg-gradient-to-r from-purple-400 to-blue-400 text-transparent bg-clip-text">
             {technology.name}
           </span>
         </h1>
         <p className="text-gray-400 text-lg mb-8">{technology.description}</p>
-        <motion.button
-          className="bg-gradient-to-r from-purple-500 to-purple-700 text-white px-8 py-3 rounded-full font-bold text-lg hover:scale-105 transform transition"
-          whileHover={{ scale: 1.05 }}
-        >
-          Zistiť viac
-        </motion.button>
+        <Link to={technology.link}>
+          <motion.button
+            className="bg-gradient-to-r from-purple-500 to-purple-700 text-white px-8 py-3 rounded-full font-bold text-lg hover:scale-105 transform transition"
+            whileHover={{ scale: 1.05 }}
+          >
+            Zistiť viac
+          </motion.button>
+        </Link>
       </div>
 
       {/* Right Side: Graph */}
       <div className="lg:w-1/2 w-full">
-        <div className="h-80 w-full">
+      <div className="h-96 sm:h-96 w-full">
           <ResponsiveContainer width="100%" height="100%">
             <LineChart data={technology.chartData}>
               <defs>

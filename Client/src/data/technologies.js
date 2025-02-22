@@ -25,6 +25,7 @@ export const technologies = [
       "Bezpečné a nezmeniteľné záznamy",
       "Škálovateľnosť v rôznych sektoroch vrátane zdravotníctva a logistiky",
     ],
+    link:'/blockchain'
   },
   {
     name: "Umelá Inteligencia vo Financovaní",
@@ -46,6 +47,7 @@ export const technologies = [
       "Zlepšenie zákazníckej skúsenosti",
       "Prediktívna analýza rizík",
     ],
+    link:'/umela-inteligencia'
   },
   {
     name: "Mobilné Platby",
@@ -67,6 +69,7 @@ export const technologies = [
       "Bezpečné platobné metódy",
       "Rozšírená dostupnosť po celom svete",
     ],
+    link:'/'
   },
   {
     name: "Kybernetická Bezpečnosť",
@@ -88,6 +91,7 @@ export const technologies = [
       "Dôvera zákazníkov v bezpečnosť",
       "Špičkové riešenia pre detekciu hrozieb",
     ],
+    link:'/'
   },
   {
     name: "RegTech Riešenia",
@@ -109,5 +113,6 @@ export const technologies = [
       "Automatizácia regulačných procesov",
       "Zlepšenie rýchlosti spracovania dát",
     ],
+    link:'/'
   },
 ];

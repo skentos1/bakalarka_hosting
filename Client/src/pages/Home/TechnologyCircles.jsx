@@ -9,7 +9,7 @@ import { AiOutlineUsergroupAdd } from "react-icons/ai";
 const ChannelSelection = () => {
   return (
     <motion.div
-      className="flex flex-col items-center bg-black text-white px-8 mt-32 py-8"
+      className="flex flex-col items-center bg-black text-white sm:px-8 mt-16 sm:mt-32 py-8"
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       transition={{ duration: 1 }}
@@ -17,7 +17,7 @@ const ChannelSelection = () => {
     >
       {/* Tlačidlo pre Technológie */}
       <motion.button
-        className="px-6 py-2 mb-8 rounded-full border-b-2 border-gray-400 text-gray-200 text-2xl"
+        className="px-4 sm:px-6 py-2 mb-8 rounded-full border-b-2 border-gray-400 text-gray-200 sm:text-2xl text-xl"
         whileHover={{ scale: 1.05 }}
         initial={{ y: -20, opacity: 0 }}
         whileInView={{ y: 0, opacity: 1 }}
@@ -29,7 +29,7 @@ const ChannelSelection = () => {
 
       {/* Riadok ikon s progresívnou veľkosťou */}
       <motion.div
-        className="flex justify-center space-x-8 mb-12"
+        className="flex justify-center space-x-4 sm:space-x-8 mb-8 sm:mb-12"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
@@ -44,7 +44,7 @@ const ChannelSelection = () => {
       >
         {/* Najmenší kruh */}
         <motion.div
-          className="bg-[#e8a435] w-16 h-16 flex items-center justify-center rounded-full shadow-lg"
+          className="bg-[#e8a435] w-12 sm:w-16 h-12 sm:h-16 flex items-center justify-center rounded-full shadow-lg"
           variants={{
             hidden: { scale: 0, opacity: 0 },
             visible: { scale: 1, opacity: 1 },
@@ -57,12 +57,12 @@ const ChannelSelection = () => {
             boxShadow: "0 0 20px rgba(255, 230, 0, 0.8)",
           }}
         >
-          <AiFillStar className="text-3xl text-black" />
+          <AiFillStar className="text-2xl sm:text-3xl text-black" />
         </motion.div>
 
         {/* Stredný kruh */}
         <motion.div
-          className="bg-[#007791] w-20 h-20 flex items-center justify-center rounded-full shadow-lg"
+          className="bg-[#007791] w-16 sm:w-20 h-16 sm:h-20 flex items-center justify-center rounded-full shadow-lg"
           variants={{
             hidden: { scale: 0, opacity: 0 },
             visible: { scale: 1, opacity: 1 },
@@ -75,12 +75,12 @@ const ChannelSelection = () => {
             boxShadow: "0 0 40px rgba(0, 153, 255, 0.8)",
           }}
         >
-          <BsCircle className="text-4xl text-black" />
+          <BsCircle className="text-3xl sm:text-4xl text-black" />
         </motion.div>
 
         {/* Najväčší kruh */}
         <motion.div
-          className="bg-purple-500 w-24 h-24 flex items-center justify-center rounded-full shadow-lg"
+          className="bg-purple-500 w-20 sm:w-24 h-20 sm:h-24 flex items-center justify-center rounded-full shadow-lg"
           variants={{
             hidden: { scale: 0, opacity: 0 },
             visible: { scale: 1, opacity: 1 },
@@ -93,12 +93,12 @@ const ChannelSelection = () => {
             boxShadow: "0 0 60px rgba(173, 0, 255, 0.8)",
           }}
         >
-          <FaFilter className="text-5xl text-black" />
+          <FaFilter className="text-4xl sm:text-5xl text-black" />
         </motion.div>
 
         {/* Stredný kruh (zmenšujúci sa) */}
         <motion.div
-          className="bg-[#e66d74] w-20 h-20 flex items-center justify-center rounded-full shadow-lg"
+          className="bg-[#e66d74] w-16 sm:w-20 h-16 sm:h-20 flex items-center justify-center rounded-full shadow-lg"
           variants={{
             hidden: { scale: 0, opacity: 0 },
             visible: { scale: 1, opacity: 1 },
@@ -111,12 +111,12 @@ const ChannelSelection = () => {
             boxShadow: "0 0 40px rgba(255, 0, 102, 0.8)",
           }}
         >
-          <AiOutlineUsergroupAdd className="text-4xl text-black" />
+          <AiOutlineUsergroupAdd className="text-3xl sm:text-4xl text-black" />
         </motion.div>
 
         {/* Najmenší kruh (zmenšujúci sa) */}
         <motion.div
-          className="bg-[#9fcb8d] w-16 h-16 flex items-center justify-center rounded-full shadow-lg"
+          className="bg-[#9fcb8d] w-12 sm:w-16 h-12 sm:h-16 flex items-center justify-center rounded-full shadow-lg"
           variants={{
             hidden: { scale: 0, opacity: 0 },
             visible: { scale: 1, opacity: 1 },
@@ -129,13 +129,13 @@ const ChannelSelection = () => {
             boxShadow: "0 0 20px rgba(0, 255, 153, 0.8)",
           }}
         >
-          <GiTriangleTarget className="text-3xl text-black" />
+          <GiTriangleTarget className="text-2xl sm:text-3xl text-black" />
         </motion.div>
       </motion.div>
 
       {/* Nadpis */}
       <motion.h1
-        className="text-4xl md:text-5xl font-bold mb-6 text-center"
+        className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 text-center"
         initial={{ y: 20, opacity: 0 }}
         whileInView={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.6 }}

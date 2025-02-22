@@ -124,7 +124,7 @@ const LandingPage = () => {
       {/* Margin to push BlockchainComponent lower */}
       <div className="mt-32">
         {" "}
-        {/* Add margin-top to push BlockchainComponent down */}\
+        {/* Add margin-top to push BlockchainComponent down */}
         <FinTechSteps />
         <BlockchainComponent />
         <BlockchainBlog />

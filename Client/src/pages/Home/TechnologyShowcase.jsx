@@ -24,7 +24,7 @@ const TechnologyShowcase = () => {
 
   return (
     <motion.section
-      className="py-20 bg-black text-white"
+      className="px-4 sm:px-6 md:px-8 py-10 sm:py-16 md:py-20 bg-black text-white"
       ref={ref}
       animate={controls}
       initial="hidden"
@@ -37,7 +37,7 @@ const TechnologyShowcase = () => {
         },
       }}
     >
-      <h2 className="text-6xl font-bold text-center mb-24">
+      <h2 className="font-bold text-center text-4xl md:text-6xl mb-8 sm:mb-16  md:mb-24">
         {" "}
         {/* Zvýšenie margin-bottom */}
         Prieskum vývoja{" "}
@@ -47,7 +47,7 @@ const TechnologyShowcase = () => {
       </h2>
 
       {/* Technologická Tab Navigácia */}
-      <div className="flex justify-center mb-8 border-b border-gray-600">
+      <div className="flex flex-wrap justify-center mb-8 border-b border-gray-600  no-scrollbar">
         {technologies.map((tech, index) => (
           <button
             key={index}
