@@ -74,13 +74,13 @@ const SignUp = () => {
 
     try {
       const response = await axios.post(
-        `http://localhost:5000/api/auth/register`,
+        `https://bakalarka-hosting.onrender.com/api/auth/register`,
         {
           firstName,
           lastName,
           email,
           password,
-        }
+        }, { withCredentials: true }
       );
 
       setSuccess(response.data.message);

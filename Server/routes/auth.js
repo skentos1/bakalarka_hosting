@@ -25,7 +25,7 @@ router.post("/register", async (req, res) => {
     // Hashovanie hesla
     const saltRounds = 10;
     const hashedPassword = await bcrypt.hash(password, saltRounds);
-
+    console.log(`[Register] New registration request for email: ${email}`);
     // Vytvorenie nového používateľa
     const newUser = new User({
       firstName,
