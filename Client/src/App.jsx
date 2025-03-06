@@ -11,6 +11,7 @@ import MojProfil from "./pages/MojProfil/MojProfil";
 import { AuthProvider } from "./context/AuthContext";
 import AnalysisHistory from "./pages/MojProfil/AnalysisHistory";
 import ScrollToTop from "./components/ScrollToTop";
+import AiComposite from "./pages/UmelaInteligencia/AI-composite";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/analyza" element={<FintechAnalysis />} />
               <Route path="/blockchain" element={<LandingPage />} />
+              <Route path="/umela-inteligencia" element={<AiComposite/>}/>
               <Route path="/register" element={<SignUp />} />
               <Route path="/login" element={<Login />} />
               <Route path="/historia" element={<AnalysisHistory/>}/>

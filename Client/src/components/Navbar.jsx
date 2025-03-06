@@ -47,29 +47,19 @@ function Navbar() {
         >
           BlockChain
         </Link>
-        <Link
-          to="/neobanking"
-          className="text-white hover:text-purple-200 transition-colors duration-300"
-        >
-          NeoBanking
-        </Link>
+        
         <Link to="/analyza">
           <button className="bg-white hover:bg-[#cea2fd] text-black font-bold py-2 px-4 rounded-full transition-colors duration-300">
             Sprav si Analyzu
           </button>
         </Link>
         <Link
-          to="/AI"
+          to="/umela-inteligencia"
           className="text-white hover:text-purple-200 transition-colors duration-300"
         >
           Umelá inteligencia
         </Link>
-        <Link
-          to="/zisti-viac"
-          className="text-white hover:text-purple-200 transition-colors duration-300"
-        >
-          Zisti viac
-        </Link>
+        
       </div>
 
       {/* Hamburger Icon pre malé obrazovky */}
@@ -167,7 +157,7 @@ function Navbar() {
         {!auth.token ? (
           <>
             <Link to="/login">
-              <button className="bg-transparent hover:bg-pink-500 text-pink-400 font-semibold py-2 px-4 border border-pink-500 hover:text-white rounded-full transition-colors duration-300">
+              <button className="bg-white hover:bg-pink-500 text-pink-400 font-semibold py-3 px-5 border border-pink-500 n hover:text-white rounded-full transition-colors duration-300">
                 Prihlásiť sa
               </button>
             </Link>

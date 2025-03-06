@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/** Updated Text Gradient Example */
+.text-gradient {
+    background-image: linear-gradient(45deg, #1E40AF 20%, #06B6D4 50%, #3B82F6 80%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  
+

@@ -1,0 +1,36 @@
+@media (min-width: 1024px) {
+    .hero_cubespinner__5nU4O .hero_face2__hWvJM {
+      transform: rotateX(120deg) translateZ(45px);
+    }
+  }
+  
+  @media (min-width: 640px) {
+    .hero_cubespinner__5nU4O .hero_face2__hWvJM {
+      transform: rotateX(120deg) translateZ(30px);
+    }
+  }
+  
+  .hero_cubespinner__5nU4O .hero_face2__hWvJM {
+    transform: rotateX(120deg) translateZ(30px);
+    -webkit-backface-visibility: hidden;
+    cursor: pointer;
+  }
+  
+  @media (min-width: 1024px) {
+    .hero_cubespinner__5nU4O div {
+      height: 89px;
+      max-width: -moz-max-content;
+      max-width: max-content;
+    }
+  }
+  
+  .hero_cubespinner__5nU4O div {
+    position: absolute;
+    inset: 0;
+    height: 60px;
+    text-align: center;
+    background: linear-gradient(50deg, #714DFF, #9C83FF 31.28%, #E151FF 77.97%, #FFF759 95.64%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
