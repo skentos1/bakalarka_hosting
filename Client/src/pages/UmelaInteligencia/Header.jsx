@@ -7,7 +7,7 @@ import metaLogo from '../../assets/meta.svg'
 import openaiLogo from '../../assets/openai.png'
 import claudeLogo from '../../assets/claudee.webp'
 import googleLogo from '../../assets/googlee.png'
-import { Navigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 const texts = [
   "Umelú inteligenciu",
@@ -26,6 +26,7 @@ const companies = [
 const FlipText = () => {
   const [index, setIndex] = useState(0);
   const controls = useAnimation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     let isCancelled = false;
@@ -43,6 +44,10 @@ const FlipText = () => {
     sequence();
     return () => { isCancelled = true; };
   }, [controls]);
+
+  const scrollDownALittle = () => {
+    window.scrollBy({ top: 500, behavior: "smooth" });
+  };
 
   return (
     <motion.div 
@@ -92,6 +97,7 @@ const FlipText = () => {
         <motion.button 
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
+          onClick={scrollDownALittle}
           className="bg-[#1E40AF] text-white px-8 py-2 rounded-xl text-base transition-all shadow-2xl hover:bg-blue-900"
         >
           Zistiť viac ↓
@@ -99,7 +105,7 @@ const FlipText = () => {
         <motion.button 
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          onClick={Navigate('/analyza')}
+          onClick={() => navigate('/analyza')}
           className="bg-black text-white px-6 py-2 rounded-md text-base transition-all shadow-2xl hover:bg-blue-600"
         >
           Vykonať analýzu →
