@@ -25,6 +25,10 @@ const HeroSection = () => {
     };
   }, []);
 
+  const scrollDownALittle = () => {
+    window.scrollBy({ top: 700, behavior: "smooth" });
+  };
+
   return (
     <div className="relative flex flex-col justify-center items-center min-h-screen {/*bg-gradient-to-b from-[#0a051e] to-black */}  text-white px-8 py-8">
       {/* Content Container: Text and Image 
@@ -55,6 +59,7 @@ const HeroSection = () => {
               boxShadow: "0px 0px 8px rgb(255, 255, 255)",
             }}
             whileTap={{ scale: 0.95 }}
+            onClick={scrollDownALittle}
           >
             Začnime!
           </motion.button>

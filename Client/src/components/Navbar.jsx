@@ -1,33 +1,43 @@
-// src/components/Navbar.jsx
 import React, { useState, useContext } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars, faTimes, faUser } from "@fortawesome/free-solid-svg-icons"; // Pridanie faUser
-import { useNavigate, Link } from "react-router-dom";
-import { AuthContext } from "../context/AuthContext"; // Import AuthContext
+import { faBars, faTimes, faUser } from "@fortawesome/free-solid-svg-icons";
+import { useNavigate, NavLink } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
-  const { auth, logout } = useContext(AuthContext); // Prístup k autentifikačnému stavu a funkcii logout
+  const { auth, logout } = useContext(AuthContext);
 
+  
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
 
-  const handleNav = () => {
-    navigate('/register');
-  };
-
+  
   const handleLogout = () => {
     logout();
-    navigate("/login"); // Voliteľné: presmerovanie po odhlásení
+    navigate("/login");
   };
+
+  
+  
+  const blockchainLinkClasses = ({ isActive }) =>
+    isActive
+      ? "relative inline-block pb-1 text-white transition-colors duration-300 before:content-[''] before:absolute before:left-0 before:-bottom-[2px] before:h-[2px] before:w-full before:bg-gradient-to-r before:from-pink-500 before:to-pink-300"
+      : "text-white hover:text-purple-200 transition-colors duration-300";
+
+  // /umela-inteligencia -> modrý gradient
+  const aiLinkClasses = ({ isActive }) =>
+    isActive
+      ? "relative inline-block pb-1 text-white transition-colors duration-300 before:content-[''] before:absolute before:left-0 before:-bottom-[2px] before:h-[2px] before:w-full before:bg-gradient-to-r before:from-blue-500 before:to-blue-300"
+      : "text-white hover:text-purple-200 transition-colors duration-300";
 
   return (
     <nav className="relative py-5 px-8 flex justify-between items-center w-full border-b border-purple-300 bg-black">
       {/* Logo */}
       <div className="flex items-center">
-        <Link
+        <NavLink
           to="/"
           className="text-transparent bg-clip-text px-2 text-5xl font-bold"
           style={{
@@ -36,33 +46,27 @@ function Navbar() {
           aria-label="FinTech Home"
         >
           FinTech
-        </Link>
+        </NavLink>
       </div>
 
-      {/* Menu Items pre väčšie obrazovky */}
+      {/* Menu Items pro velke obrazovky */}
       <div className="hidden md:flex space-x-8 text-xl font-semibold items-center">
-        <Link
-          to="/blockchain"
-          className="text-white hover:text-purple-200 transition-colors duration-300"
-        >
+        <NavLink to="/blockchain" className={blockchainLinkClasses}>
           BlockChain
-        </Link>
-        
-        <Link to="/analyza">
+        </NavLink>
+
+        <NavLink to="/analyza">
           <button className="bg-white hover:bg-[#cea2fd] text-black font-bold py-2 px-4 rounded-full transition-colors duration-300">
             Sprav si Analyzu
           </button>
-        </Link>
-        <Link
-          to="/umela-inteligencia"
-          className="text-white hover:text-purple-200 transition-colors duration-300"
-        >
+        </NavLink>
+
+        <NavLink to="/umela-inteligencia" className={aiLinkClasses}>
           Umelá inteligencia
-        </Link>
-        
+        </NavLink>
       </div>
 
-      {/* Hamburger Icon pre malé obrazovky */}
+      {/* Hamburger (mobilne) */}
       <div className="md:hidden">
         <button onClick={toggleMenu}>
           <FontAwesomeIcon
@@ -72,72 +76,93 @@ function Navbar() {
         </button>
       </div>
 
-      {/* Dropdown Menu pre malé obrazovky */}
-      {isOpen && (
-        <div className="absolute top-16 left-0 w-full bg-black py-5 text-white flex flex-col md:hidden space-y-6">
-          <Link
+      {/* Overlay Menu pre malé obrazovky (animované) */}
+      <div
+        className={`
+          fixed top-0 left-0 w-full h-full bg-black text-white z-50 flex flex-col md:hidden overflow-y-auto
+          transform transition-transform duration-300 ease-in-out
+          ${isOpen ? "translate-x-0" : "translate-x-full pointer-events-none"}
+        `}
+      >
+        {/* Horna lišta s FinTech a "X" */}
+        <div className="flex items-center justify-between p-4 border-b border-purple-300">
+          <NavLink
+            to="/"
+            className="text-transparent bg-clip-text text-5xl font-bold"
+            style={{
+              backgroundImage: "linear-gradient(to right, #a066ff, #cea2fd)",
+            }}
+            onClick={toggleMenu}
+          >
+            FinTech
+          </NavLink>
+          <button onClick={toggleMenu}>
+            <FontAwesomeIcon icon={faTimes} className="text-white text-3xl" />
+          </button>
+        </div>
+
+        {/* mobilne menu */}
+        <div className="flex flex-col space-y-6 px-8 pb-8 pt-6">
+          <NavLink
+            to="/"
+            className="hover:text-purple-200 transition-colors duration-300 py-4 border-b border-gray-300 text-lg"
+            onClick={toggleMenu}
+          >
+            Domov
+          </NavLink>
+
+          <NavLink
             to="/blockchain"
-            className="hover:text-purple-200 transition-colors duration-300 py-4 px-8 border-b border-gray-300 text-lg w-full"
+            className={`py-4 border-b border-gray-300 text-lg ${blockchainLinkClasses}`}
             onClick={toggleMenu}
           >
             BlockChain
-          </Link>
-          <Link
-            to="/neobanking"
-            className="hover:text-purple-200 transition-colors duration-300 py-4 px-8 border-b border-gray-300 text-lg w-full"
-            onClick={toggleMenu}
-          >
-            NeoBanking
-          </Link>
-          <Link to="/analyza">
-            <button
-              onClick={toggleMenu}
-              className="bg-white hover:bg-[#cea2fd] text-black font-bold py-2 px-8 my-4 mx-8 rounded-full transition-colors duration-300 w-auto"
-            >
+          </NavLink>
+
+          <NavLink to="/analyza" onClick={toggleMenu}>
+            <button className="bg-white hover:bg-[#cea2fd] text-black font-bold py-2 px-8 my-4 rounded-full transition-colors duration-300">
               Sprav si Analyzu
             </button>
-          </Link>
-          <Link
-            to="/AI"
-            className="hover:text-purple-200 transition-colors duration-300 py-4 px-8 border-b border-gray-300 text-lg w-full"
+          </NavLink>
+
+          <NavLink
+            to="/umela-inteligencia"
+            className={`py-4 border-b border-gray-300 text-lg ${aiLinkClasses}`}
             onClick={toggleMenu}
           >
             Umelá inteligencia
-          </Link>
-          <Link
-            to="/zisti-viac"
-            className="hover:text-purple-200 transition-colors duration-300 py-4 px-8 border-b border-gray-300 text-lg w-full"
-            onClick={toggleMenu}
-          >
-            Zisti viac
-          </Link>
+          </NavLink>
+
           
-          {/* Podmienečné zobrazenie pre autentifikáciu */}
           {!auth.token ? (
             <>
-              <Link
-                to="/login"
-                className="hover:text-purple-200 transition-colors duration-300 py-4 px-8 text-lg w-full"
-                onClick={toggleMenu}
-              >
+            <NavLink
+              to="/login"
+              className="hover:text-purple-200 transition-colors duration-300 py-4 text-lg"
+              onClick={toggleMenu}
+            >
+              <button className="w-full bg-gradient-to-r from-pink-500 to-pink-300 text-white font-semibold py-3 px-5 rounded-full shadow-lg transition-all duration-300 transform hover:scale-105 hover:shadow-xl">
                 Prihlásiť sa
-              </Link>
-              <Link
-                to="/register"
-                className="hover:text-purple-200 transition-colors duration-300 py-4 px-8 text-lg w-full"
-                onClick={toggleMenu}
-              >
+              </button>
+            </NavLink>
+            <NavLink
+              to="/register"
+              className="hover:text-purple-200 transition-colors duration-300 py-4 text-lg"
+              onClick={toggleMenu}
+            >
+              <button className="w-full bg-gradient-to-r from-purple-600 to-purple-400 text-white font-bold py-3 px-5 rounded-full shadow-lg transition-all duration-300 transform hover:scale-105 hover:shadow-xl">
                 Registrácia
-              </Link>
-            </>
+              </button>
+            </NavLink>
+          </>
           ) : (
-            <div className="flex flex-col space-y-4 px-8">
-              <Link to="/moj-profil" onClick={toggleMenu}>
-                <button className="flex items-center bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-full transition-colors duration-300 w-full">
+            <div className="flex flex-col space-y-4 mt-4">
+              <NavLink to="/moj-profil" onClick={toggleMenu}>
+                <button className="flex items-center bg-white hover:bg-[#cea2fd] text-black py-2 px-4 rounded-full transition-colors duration-300 w-full">
                   <FontAwesomeIcon icon={faUser} className="mr-2" />
                   Moj Profil
                 </button>
-              </Link>
+              </NavLink>
               <button
                 onClick={() => {
                   toggleMenu();
@@ -150,42 +175,43 @@ function Navbar() {
             </div>
           )}
         </div>
-      )}
-
-      {/* Podmienečné tlačidlá pre väčšie obrazovky */}
-      <div className="hidden md:flex pr-8 space-x-4">
-        {!auth.token ? (
-          <>
-            <Link to="/login">
-              <button className="bg-white hover:bg-pink-500 text-pink-400 font-semibold py-3 px-5 border border-pink-500 n hover:text-white rounded-full transition-colors duration-300">
-                Prihlásiť sa
-              </button>
-            </Link>
-            <Link to="/register">
-              <button className="bg-white hover:bg-purple-600 text-purple-400 font-bold py-3 px-5 rounded-full shadow-md transition-all duration-300 ease-in-out transform hover:scale-105">
-                Registrácia
-              </button>
-            </Link>
-          </>
-        ) : (
-          <div className="flex items-center space-x-4">
-            <Link to="/moj-profil">
-              <button className="flex items-center bg-[white] hover:bg-[#cea2fd] text-black font-bold py-2 px-4 rounded-full transition-colors duration-300">
-                <FontAwesomeIcon icon={faUser} className="mr-2" />
-                Moj Profil
-              </button>
-            </Link>
-            <button
-              onClick={handleLogout}
-              className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full transition-colors duration-300"
-            >
-              Odhlásiť sa
-            </button>
-          </div>
-        )}
       </div>
 
-      {/* Najtenší gradientový pruh na spodku */}
+      {/* Tlačítka pro velke obrazovky (Auth) */}
+      <div className="hidden md:flex pr-8 space-x-4">
+  {!auth.token ? (
+    <>
+      <NavLink to="/login">
+        <button className="bg-gradient-to-r from-pink-500 to-pink-300 text-white font-semibold py-3 px-5 rounded-full shadow-lg transition-all duration-300 transform hover:scale-105 hover:shadow-xl">
+          Prihlásiť sa
+        </button>
+      </NavLink>
+      <NavLink to="/register">
+        <button className="bg-gradient-to-r from-purple-600 to-purple-400 text-white font-bold py-3 px-5 rounded-full shadow-lg transition-all duration-300 transform hover:scale-105 hover:shadow-xl">
+          Registrácia
+        </button>
+      </NavLink>
+    </>
+  ) : (
+    <div className="flex items-center space-x-4">
+      <NavLink to="/moj-profil">
+        <button className="flex items-center bg-white hover:bg-[#cea2fd] text-black font-bold py-2 px-4 rounded-full transition-colors duration-300">
+          <FontAwesomeIcon icon={faUser} className="mr-2" />
+          Moj Profil
+        </button>
+      </NavLink>
+      <button
+        onClick={handleLogout}
+        className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full transition-colors duration-300"
+      >
+        Odhlásiť sa
+      </button>
+    </div>
+  )}
+</div>
+
+
+      {/* Gradientový pruh na spodku */}
       <div
         className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-[80%]"
         style={{

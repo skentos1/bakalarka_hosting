@@ -60,11 +60,14 @@ const MojProfil = () => {
       try {
         // POZOR: Uisti sa, že tvoj endpoint je "/api/analyze/history" alebo "/api/analysis/history"
         // Podľa toho, ako ho máš definovaný na backende
-        const res = await axios.get("https://bakalarka-hosting.onrender.com/api/analyze/history", {
-          headers: {
-            Authorization: `Bearer ${auth.token}`,
-          },
-        });
+        const res = await axios.get(
+          "https://bakalarka-hosting.onrender.com/api/analyze/history",
+          {
+            headers: {
+              Authorization: `Bearer ${auth.token}`,
+            },
+          }
+        );
         // Očakávame: { analyses: [...] }
         if (res.data && Array.isArray(res.data.analyses)) {
           setAnalyses(res.data.analyses);
@@ -97,7 +100,9 @@ const MojProfil = () => {
   if (loadingProfile) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-gray-800 to-black">
-        <div className="text-white animate-pulse text-xl">Načítavanie profilu...</div>
+        <div className="text-white animate-pulse text-xl">
+          Načítavanie profilu...
+        </div>
       </div>
     );
   }
@@ -145,7 +150,8 @@ const MojProfil = () => {
                   />
                 </svg>
                 <p>
-                  <span className="font-semibold">Meno:</span> {profile.firstName}
+                  <span className="font-semibold">Meno:</span>{" "}
+                  {profile.firstName}
                 </p>
               </div>
               <div className="flex items-center">
@@ -163,7 +169,8 @@ const MojProfil = () => {
                   />
                 </svg>
                 <p>
-                  <span className="font-semibold">Priezvisko:</span> {profile.lastName}
+                  <span className="font-semibold">Priezvisko:</span>{" "}
+                  {profile.lastName}
                 </p>
               </div>
               <div className="flex items-center">
@@ -228,7 +235,9 @@ const MojProfil = () => {
 
             {/* Zoznam analýz */}
             {!loadingAnalyses && !errorAnalyses && analyses.length === 0 && (
-              <p className="text-white">Zatiaľ nemáte uložené žiadne analýzy.</p>
+              <p className="text-white">
+                Zatiaľ nemáte uložené žiadne analýzy.
+              </p>
             )}
 
             {!loadingAnalyses && !errorAnalyses && analyses.length > 0 && (
@@ -270,8 +279,11 @@ const MojProfil = () => {
 
             {/* Detail konkrétnej analýzy - Modál */}
             {selectedAnalysis && (
-              <div className="fixed inset-0 text-white bg-black bg-opacity-50 flex items-center justify-center z-50 overflow-auto">
-                <div className="bg-gray-800 p-8 rounded-lg w-11/12 max-w-5xl relative">
+              <div className="fixed inset-0 text-white bg-black bg-opacity-50 flex items-center justify-center z-50 overflow-y-auto">
+                <div
+                  className="bg-gray-800 p-8 rounded-lg w-11/12 max-w-5xl relative max-h-[80vh] overflow-y-auto"
+        
+                >
                   {/* Tlačidlo na zatvorenie modálu */}
                   <button
                     onClick={closeModal}
